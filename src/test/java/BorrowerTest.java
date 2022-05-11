@@ -3,32 +3,29 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class LibraryTest {
+public class BorrowerTest {
 
     private Library library;
     private Book book1;
+    private Borrower borrower;
 
     @Before
     public void before(){
         library = new Library(1);
         book1 = new Book("A Song of Ice and Fire", "George R.R. Martin", "Fantasy");
+        borrower = new Borrower("Jeff");
     }
 
     @Test
-    public void checkBookListEmpty(){
-       assertEquals(0, library.getNumberOfBooks());
+    public void hasEmptyCollection(){
+        assertEquals(0, borrower.getNumberOfBooksInCollection());
     }
 
     @Test
-    public void canAddBookToStock(){
+    public void canTakeBookFromLibrary(){
         library.addBookToStock(book1);
-        assertEquals(1, library.getNumberOfBooks());
-    }
-
-    @Test
-    public void canRemoveBookFromStock(){
-        library.addBookToStock(book1);
-        library.removeBookFromStock(book1);
+        borrower.takeBookFromLibrary(library, book1);
+        assertEquals(1, borrower.getNumberOfBooksInCollection());
         assertEquals(0, library.getNumberOfBooks());
     }
 
